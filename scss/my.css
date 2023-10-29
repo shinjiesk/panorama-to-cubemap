@@ -1,4 +1,3 @@
-
 #cubemap {
     width: 800px;
     height: 600px;
@@ -6,22 +5,19 @@
     margin-top: 15px;
 }
 
-
-
 .dropzone-area {
     border: 2px dashed #cccccc;
     padding: 20px;
     text-align: center;
-    transition: background-color 0.3s;  /* Add this line for smooth color transition */
+    transition: background-color 0.3s; /* Add this line for smooth color transition */
 }
 
 .dropzone-area.dragging {
-    background-color: #f0f0f0;  /* Change this to any color you prefer */
+    background-color: #f0f0f0; /* Change this to any color you prefer */
 }
 
-
 .hidden-file-input {
-    display: none; 
+    display: none;
 }
 
 .custom-file-upload {
@@ -35,7 +31,10 @@
     background-color: #f0f0f0;
 }
 
-
 .error-message {
     color: red;
+}
+
+.bg-black {
+    background-color: #151515 !important; /* あるいはお好みの色に設定 */
 }
