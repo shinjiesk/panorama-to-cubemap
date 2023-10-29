@@ -28,6 +28,18 @@ const CubeMapApp = (() => {
             this.img = document.createElement("img");
             this.img.style.filter = "blur(4px)";
             this.anchor.appendChild(this.img);
+
+            // マウスホバーイベントリスナーの追加
+            this.anchor.addEventListener("mouseover", () => {
+                this.img.style.border = "2px solid white";
+                this.anchor.style.zIndex = "1";  
+                this.showFaceName(faceName); 
+            });
+            this.anchor.addEventListener("mouseout", () => {
+                this.img.style.border = "";
+                this.anchor.style.zIndex = "";
+                this.hideFaceName()
+            });
         }
 
         setPreview(url, x, y) {
@@ -40,6 +52,27 @@ const CubeMapApp = (() => {
             this.anchor.href = url;
             this.anchor.download = `${loadedFileName}_${this.faceName}.png`;
             this.img.style.filter = "";
+        }
+        showFaceName(faceName) {
+            this.label = document.createElement("div");
+            this.label.textContent = faceName;
+            this.label.style.position = "absolute";
+            this.label.style.background = "rgba(0, 0, 0, 0.5)";
+            this.label.style.color = "white";
+            this.label.style.padding = "2px 5px";
+            this.label.style.borderRadius = "3px";
+            this.label.style.top = "10px";
+            this.label.style.left = "10px";
+            this.label.style.zIndex = "2";
+            this.anchor.appendChild(this.label);
+        }
+    
+        // 新しいメソッドを追加してfaceNameを非表示にする
+        hideFaceName() {
+            if (this.label) {
+                this.anchor.removeChild(this.label);
+                this.label = null;
+            }
         }
     }
 
@@ -71,7 +104,7 @@ const CubeMapApp = (() => {
     // アプリケーションで使用される主要なDOM要素への参照を保持します。
     const dom = {
         imageInput: document.getElementById("imageInput"),
-        dropzone: document.getElementById("dropzone"), 
+        dropzone: document.getElementById("dropzone"),
         faces: document.getElementById("faces"),
         generating: document.getElementById("generating"),
         fileNameDisplay: document.getElementById("fileNameDisplay"),
@@ -227,4 +260,3 @@ const CubeMapApp = (() => {
         loadImage,
     };
 })();
-
