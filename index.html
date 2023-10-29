@@ -24,8 +24,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css"
         />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
-        <script src="../assets/js/color-modes.js"></script>
-        <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
         <title>Roblox パノラマ to スカイ</title>
         <!-- Google tag (gtag.js) --->
         <script
@@ -46,25 +45,34 @@
 
     <body class="bg-black">
         <div class="container px-3 mx-auto">
-            <!-- <header class="p-3 text-white">
+            <header class="p-3 text-white">
                 <div
                     class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
                 >
-                    <div>パノラマ to Robloxスカイボックス</div>
+                    <div data-lang-key="header_title">
+                        パノラマ to Robloxスカイボックス
+                    </div>
                     <div
                         class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
                     ></div>
-                    <div class="text-end text-black">hoge</div>
+                    <div class="text-end">
+                        <a class="language-link" onclick="changeLanguage('en')"
+                            >English</a
+                        >
+                        <a class="language-link" onclick="changeLanguage('jp')"
+                            >日本語</a
+                        >
+                    </div>
                 </div>
-            </header> -->
+            </header>
             <!--- ============================================= -->
 
             <div class="px-4 pt-5 pb-5 text-center text-white">
-                <h1 class="display-4 fw-bold">
+                <h1 class="display-4 fw-bold" data-lang-key="hero_title">
                     パノラマ to Robloxスカイボックス
                 </h1>
-                <div class="col-lg-6 mx-auto">
-                        360°パノラマ画像をRobroxの6面スカイボックス画像に変換します
+                <div class="col-lg-6 mx-auto" data-lang-key="hero_subtitle">
+                    360°パノラマ画像をRobroxの6面スカイボックス画像に変換します
                 </div>
             </div>
 
@@ -72,25 +80,35 @@
             <div class="card mt-4 bg-black text-white border-light">
                 <h2 class="card-header">1</h2>
                 <div class="card-body">
-                    <h5 class="card-title">パノラマ画像を用意する</h5>
+                    <h5 class="card-title" data-lang-key="title_1">
+                        パノラマ画像を用意する
+                    </h5>
                     <div class="card-text">
                         <ul>
-                            <li>縦横比が1:2の等角円筒図法のパノラマ画像</li>
+                            <li data-lang-key="line_1_1">
+                                縦横比が1:2の等角円筒図法のパノラマ画像
+                            </li>
                             <li>
-                                画像フォーマットはPNG、Jpeg、WebPに対応（EXR、HDRには非対応です。変換するには<a
+                                <span data-lang-key="line_1_2">
+                                    画像フォーマットはPNG、JPEG、WebPに対応（EXR、HDRには非対応です。変換するには:
+                                </span>
+                                <a
                                     href="https://convertio.co/ja/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    >こちら</a
-                                >へ）
+                                    >Convertio.co</a
+                                >
                             </li>
                             <li>
-                                パノラマ画像の入手は、例えば<a
+                                <span data-lang-key="line_1_3">
+                                    パノラマ画像の入手は:
+                                </span>
+                                <a
                                     href="https://polyhaven.com/hdris"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     >Poly Haven</a
-                                >から。
+                                >
                             </li>
                         </ul>
                     </div>
@@ -102,13 +120,16 @@
             <div class="card mt-4 bg-black text-white border-light">
                 <h2 class="card-header">2</h2>
                 <div class="card-body">
-                    <h5 class="card-title">パノラマ画像をアップロード</h5>
+                    <h5 class="card-title" data-lang-key="title_2">
+                        パノラマ画像をアップロード
+                    </h5>
                     <div class="card-text">
                         <figure>
                             <div id="dropzone" class="dropzone-area">
                                 <label
                                     for="imageInput"
                                     class="custom-file-upload"
+                                    data-lang-key="line_2_1"
                                 >
                                     ファイルを選択またはここにドラッグアンドドロップ
                                 </label>
@@ -134,20 +155,25 @@
             <div class="card mt-4 bg-black text-white border-light">
                 <h2 class="card-header">3</h2>
                 <div class="card-body">
-                    <h5 class="card-title">ダウンロード</h5>
+                    <h5 class="card-title" data-lang-key="title_3">
+                        ダウンロード
+                    </h5>
                     <div class="card-text">
-                        <div class="card-text">
+                        <div class="card-text" data-lang-key="line_3_1">
                             それぞれの面をクリックしてダウンロードしてください。
                         </div>
 
                         <div id="cubemap" class="bg-dark">
-                            <b id="generating" style="visibility: hidden"
+                            <b
+                                id="generating"
+                                style="visibility: hidden"
+                                data-lang-key="line_3_2"
                                 >生成中...</b
                             >
                             <output id="faces"></output>
                         </div>
                         <div class="mt-3">
-                            <label for="cubeRotation"
+                            <label for="cubeRotation" data-lang-key="line_3_3"
                                 >回転させて正面の向きを変更できます:</label
                             >
                             <input
@@ -166,8 +192,10 @@
             <div class="card mt-4 bg-black text-white border-light">
                 <h2 class="card-header">4</h2>
                 <div class="card-body">
-                    <h5 class="card-title">Roblox Studioで設定</h5>
-                    <div class="card-text">
+                    <h5 class="card-title" data-lang-key="title_4">
+                        Roblox Studioで設定
+                    </h5>
+                    <div class="card-text" data-lang-key="line_4_1">
                         Roblox
                         Studioで、LightingのSkyに設定します。ファイル名の末尾とプロパティ名を合わせてください。
                     </div>
@@ -212,6 +240,7 @@
             crossorigin="anonymous"
         ></script>
         <script src="js/cubemap.js"></script>
+        <script src="js/lang.js"></script>
         <script type="module" src="js/main.js"></script>
         <script>
             // Dropzone class configuration
