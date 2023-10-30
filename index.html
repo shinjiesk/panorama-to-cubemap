@@ -76,12 +76,13 @@
                 </div>
             </div>
 
-            <!--- ============================================= -->
+            <!--- =========================================== -->
+
             <div class="card mt-4 bg-black text-white border-light">
                 <h2 class="card-header">1</h2>
                 <div class="card-body">
                     <h5 class="card-title" data-lang-key="title_1">
-                        パノラマ画像を用意する
+                        パノラマ画像をアップロード
                     </h5>
                     <div class="card-text">
                         <ul>
@@ -90,7 +91,7 @@
                             </li>
                             <li>
                                 <span data-lang-key="line_1_2">
-                                    画像フォーマットはPNG、JPEG、WebPに対応（EXR、HDRには非対応です。変換するには：
+                                    画像フォーマットはPNG、JPEG、WebPに対応。EXR、HDRには非対応です。変換するには：
                                 </span>
                                 <a
                                     href="https://convertio.co/ja/"
@@ -111,25 +112,12 @@
                                 >
                             </li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!--- =========================================== -->
-
-            <div class="card mt-4 bg-black text-white border-light">
-                <h2 class="card-header">2</h2>
-                <div class="card-body">
-                    <h5 class="card-title" data-lang-key="title_2">
-                        パノラマ画像をアップロード
-                    </h5>
-                    <div class="card-text">
                         <figure>
                             <div id="dropzone" class="dropzone-area">
                                 <label
                                     for="imageInput"
                                     class="custom-file-upload"
-                                    data-lang-key="line_2_1"
+                                    data-lang-key="line_1_4"
                                 >
                                     ファイルを選択またはここにドラッグアンドドロップ
                                 </label>
@@ -139,11 +127,27 @@
                                     accept="image/*"
                                     class="hidden-file-input"
                                 />
-                                <div id="fileNameDisplay"></div>
+
                                 <div
                                     id="errorMessage"
                                     class="error-message"
                                 ></div>
+                            </div>
+
+                            <div class="d-flex text-wrap">
+                                <div id="preview" class="bg-dark flex-shrink-0">
+                                    <output id="imagePreview"></output>
+                                </div>
+                                <div class="ms-5 mt-2 text-wrap">
+                                    <div>
+                                        <div>File:</div>
+                                        <div id="fileNameDisplay"></div>
+                                    </div>
+                                    <div>
+                                        <div class="mt-5">Width x Height:</div>
+                                        <div id="fileWidthHeight"></div>
+                                    </div>
+                                </div>
                             </div>
                         </figure>
                     </div>
@@ -153,27 +157,33 @@
             <!--- ============================================= -->
 
             <div class="card mt-4 bg-black text-white border-light">
-                <h2 class="card-header">3</h2>
+                <h2 class="card-header">2</h2>
                 <div class="card-body">
-                    <h5 class="card-title" data-lang-key="title_3">
+                    <h5 class="card-title" data-lang-key="title_2">
                         ダウンロード
                     </h5>
                     <div class="card-text">
-                        <div class="card-text" data-lang-key="line_3_1">
-                            それぞれの面をクリックしてダウンロードしてください。
+                        <div class="card-text" data-lang-key="line_2_1">
+                            右のボタンから各面をダウンロードしてください
                         </div>
 
-                        <div id="cubemap" class="bg-dark">
-                            <b
-                                id="generating"
-                                style="visibility: hidden"
-                                data-lang-key="line_3_2"
-                                >生成中...</b
-                            >
-                            <output id="faces"></output>
+                        <div class="d-flex text-wrap">
+                            <div id="cubemap" class="bg-dark flex-shrink-0">
+                                <b
+                                    id="generating"
+                                    style="visibility: hidden"
+                                    data-lang-key="line_2_2"
+                                    >生成中...</b
+                                >
+                                <output id="faces"></output>
+                            </div>
+                            <div class="ms-5 mt-2 text-wrap">
+                                <div id="downloadFileName"></div>
+                            </div>
                         </div>
+
                         <div class="mt-3">
-                            <label for="cubeRotation" data-lang-key="line_3_3"
+                            <label for="cubeRotation" data-lang-key="line_2_3"
                                 >角度を入力すると正面の向きを変更できます：</label
                             >
                             <input
@@ -190,12 +200,12 @@
 
             <!--- ============================================= -->
             <div class="card mt-4 bg-black text-white border-light">
-                <h2 class="card-header">4</h2>
+                <h2 class="card-header">3</h2>
                 <div class="card-body">
-                    <h5 class="card-title" data-lang-key="title_4">
+                    <h5 class="card-title" data-lang-key="title_3">
                         Roblox Studioで設定
                     </h5>
-                    <div class="card-text" data-lang-key="line_4_1">
+                    <div class="card-text" data-lang-key="line_3_1">
                         Roblox
                         Studioで、LightingのSkyに設定します。ファイル名の末尾とプロパティ名を合わせてください。
                     </div>

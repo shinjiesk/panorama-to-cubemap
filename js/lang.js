@@ -3,41 +3,45 @@ let lang = {
         header_title: "パノラマ to Robloxスカイボックス",
         hero_title: "パノラマ to Robloxスカイボックス",
         hero_subtitle: "360°パノラマ画像をRobroxの6面スカイボックス画像に変換します",
-        title_1: "パノラマ画像を用意する",
+        title_1: "パノラマ画像をアップロード",
         line_1_1: "縦横比が1:2の等角円筒図法のパノラマ画像",
-        line_1_2: "画像フォーマットはPNG、JPEG、WebPに対応（EXR、HDRには非対応です。変換するには：",
+        line_1_2: "画像フォーマットはPNG、JPEG、WebPに対応。EXR、HDRには非対応です。変換するには：",
         line_1_3: "パノラマ画像の入手は：",
-        title_2: "パノラマ画像をアップロード",
-        line_2_1: "ファイルを選択またはここにドラッグアンドドロップ",
-        title_3: "ダウンロード",
-        line_3_1: "それぞれの面をクリックしてダウンロードしてください。",
-        line_3_2: "生成中...",
-        line_3_3: "角度を入力すると正面の向きを変更できます：",
-        title_4: "Roblox Studioで設定",
-        line_4_1: "Roblox Studioで、LightingのSkyに設定します。ファイル名の末尾とプロパティ名を合わせてください。",
+        line_1_4: "ファイルを選択またはここにドラッグアンドドロップ",
+        title_2: "ダウンロード",
+        line_2_1: "右のボタンから各面をダウンロードしてください",
+        line_2_2: "生成中...",
+        line_2_3: "角度を入力すると正面の向きを変更できます：",
+        title_3: "Roblox Studioで設定",
+        line_3_1: "Roblox Studioで、LightingのSkyに設定します。ファイル名の末尾とプロパティ名を合わせてください",
+        error_multiple_files: "アップロードできるファイルはひとつだけです",
+        error_not_image: "画像ファイル（PNG、JPEG、WebP）をアップロードしてください",
     },
     en: {
         header_title: "Panorama to Roblox Skybox",
         hero_title: "Panorama to Roblox Skybox",
         hero_subtitle: "Convert 360° panorama images to Roblox's 6-face skybox images",
-        title_1: "Prepare Panorama Image",
+        title_1: "Upload Panorama Image",
         line_1_1: "Panorama image with an aspect ratio of 1:2 in equidistant cylindrical projection",
-        line_1_2: "Image formats supported are PNG, JPEG, WebP (EXR, HDR are not supported. To convert:",
+        line_1_2: "Image formats supported are PNG, JPEG, WebP. EXR, HDR are not supported. To convert:",
         line_1_3: "Obtaining panorama images:",
-        title_2: "Upload Panorama Image",
-        line_2_1: "Select file or drag and drop here",
-        title_3: "Download",
-        line_3_1: "Click on each face to download.",
-        line_3_2: "Generating...",
-        line_3_3: "You can change the front direction by entering the angle:",
-        title_4: "Setting in Roblox Studio",
-        line_4_1: "In Roblox Studio, set it to Lighting's Sky. Match the end of the filename with the property name.",
-        
-
+        line_1_4: "Select file or drag and drop here",
+        title_2: "Download",
+        line_2_1: "download each face from the button on the right.",
+        line_2_2: "Generating...",
+        line_2_3: "You can change the front direction by entering the angle:",
+        title_3: "Setting in Roblox Studio",
+        line_3_1: "In Roblox Studio, set it to Lighting's Sky. Match the end of the filename with the property name.",
+        error_multiple_files: "Only one file can be uploaded.",
+        error_not_image: "Please upload an image file.(PNG、JPEG、WebP)",
     }
 };
 
+let currentLanguage = 'jp';  
+
 function changeLanguage(language) {
+    currentLanguage = language; 
+
     let elements = document.querySelectorAll('[data-lang-key]');
     elements.forEach(function(element) {
         let key = element.getAttribute('data-lang-key');

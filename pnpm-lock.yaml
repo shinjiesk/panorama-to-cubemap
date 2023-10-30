@@ -9,12 +9,12 @@ dependencies:
     specifier: ^2.11.8
     version: 2.11.8
   bootstrap:
-    specifier: ^5.3.0
+    specifier: ^5.3.2
     version: 5.3.2(@popperjs/core@2.11.8)
 
 devDependencies:
   autoprefixer:
-    specifier: ^10.4.14
+    specifier: ^10.4.16
     version: 10.4.16(postcss@8.4.31)
   nodemon:
     specifier: ^3.0.1
@@ -23,19 +23,19 @@ devDependencies:
     specifier: ^4.1.5
     version: 4.1.5
   postcss:
-    specifier: ^8.4.27
+    specifier: ^8.4.31
     version: 8.4.31
   postcss-cli:
     specifier: ^10.1.0
     version: 10.1.0(postcss@8.4.31)
   sass:
-    specifier: ^1.64.1
+    specifier: ^1.69.5
     version: 1.69.5
   sirv-cli:
     specifier: ^2.0.2
     version: 2.0.2
   stylelint:
-    specifier: ^15.10.2
+    specifier: ^15.11.0
     version: 15.11.0
   stylelint-config-twbs-bootstrap:
     specifier: ^11.0.1

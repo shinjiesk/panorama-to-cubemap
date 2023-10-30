@@ -18,6 +18,59 @@ const CubeMapApp = (() => {
         }
     }
 
+    function updateDownloadFileName() {
+        removeChildren(dom.downloadFileName);  // Clear existing links
+    
+        const faces = dom.faces.querySelectorAll('a');
+        faces.forEach(face => {
+            // Get the last two characters from the filename (excluding the extension)
+            const faceIndicator = face.download.slice(-6, -4);
+            let positionText = "";
+            switch(faceIndicator) {
+                case "Rt":
+                    positionText = "Right:";
+                    break;
+                case "Lf":
+                    positionText = "Left:";
+                    break;
+                case "Ft":
+                    positionText = "Front:";
+                    break;
+                case "Bk":
+                    positionText = "Back:";
+                    break;
+                case "Up":
+                    positionText = "Up:";
+                    break;
+                case "Dn":
+                    positionText = "Down:";
+                    break;
+            }
+    
+            // Create a new div to hold the position text
+            const positionDiv = document.createElement('div');
+            positionDiv.textContent = positionText;
+            dom.downloadFileName.appendChild(positionDiv);
+    
+            // Create the download link
+            const link = document.createElement('a');
+            link.href = face.href;
+            link.download = face.download;
+            link.textContent = face.download;
+            link.className = 'downloadLinkButton';  
+            link.style.display = 'block';  // Display links in a list
+            dom.downloadFileName.appendChild(link);
+        });
+    }
+    
+    
+
+
+
+
+
+
+
     // キューブマップの各面を表現し、プレビューとダウンロードのリンクを作成します。
     class CubeFace {
         constructor(faceName) {
@@ -32,14 +85,15 @@ const CubeMapApp = (() => {
             // マウスホバーイベントリスナーの追加
             this.anchor.addEventListener("mouseover", () => {
                 this.img.style.border = "2px solid white";
-                this.anchor.style.zIndex = "1";  
-                this.showFaceName(faceName); 
+                this.anchor.style.zIndex = "1";
+                this.showFaceName(faceName);
             });
             this.anchor.addEventListener("mouseout", () => {
                 this.img.style.border = "";
                 this.anchor.style.zIndex = "";
-                this.hideFaceName()
+                this.hideFaceName();
             });
+            
         }
 
         setPreview(url, x, y) {
@@ -52,7 +106,10 @@ const CubeMapApp = (() => {
             this.anchor.href = url;
             this.anchor.download = `${loadedFileName}_${this.faceName}.png`;
             this.img.style.filter = "";
+            updateDownloadFileName();
         }
+
+        
         showFaceName(faceName) {
             this.label = document.createElement("div");
             this.label.textContent = faceName;
@@ -66,7 +123,7 @@ const CubeMapApp = (() => {
             this.label.style.zIndex = "2";
             this.anchor.appendChild(this.label);
         }
-    
+
         // 新しいメソッドを追加してfaceNameを非表示にする
         hideFaceName() {
             if (this.label) {
@@ -75,6 +132,8 @@ const CubeMapApp = (() => {
             }
         }
     }
+
+
 
     const mimeType = {
         png: "image/png",
@@ -108,7 +167,9 @@ const CubeMapApp = (() => {
         faces: document.getElementById("faces"),
         generating: document.getElementById("generating"),
         fileNameDisplay: document.getElementById("fileNameDisplay"),
+        fileWidthHeight: document.getElementById("fileWidthHeight"),
         errorMessage: document.getElementById("errorMessage"),
+        downloadFileName: document.getElementById("downloadFileName"),
     };
 
     // キューブの回転を制御するInputインスタンスを保持します。
@@ -143,13 +204,10 @@ const CubeMapApp = (() => {
         event.preventDefault();
         dom.dropzone.classList.remove("dragging");
 
-        // Clear any existing error message
-        dom.errorMessage.textContent = "";
-
         const files = event.dataTransfer.files;
         if (files.length > 1) {
-            dom.errorMessage.textContent =
-                "アップロードできるファイルはひとつだけです。";
+            showError("error_multiple_files");
+            clearFileName();
             return;
         }
 
@@ -157,8 +215,28 @@ const CubeMapApp = (() => {
         if (file && file.type.startsWith("image/")) {
             dom.imageInput.files = event.dataTransfer.files;
             loadImage();
+            clearError();
+        } else {
+            showError("error_not_image");
+            displayFileName(file);
         }
     });
+
+    function showError(messageKey) {
+        dom.errorMessage.textContent = lang[currentLanguage][messageKey];
+    }
+
+    function clearError() {
+        dom.errorMessage.textContent = "";
+    }
+
+    function clearFileName() {
+        dom.fileNameDisplay.textContent = "";
+        dom.fileWidthHeight.textContent = ""; 
+    }
+
+
+    document.addEventListener("DOMContentLoaded", clearError);
 
     // アップロードされた画像を読み込み、processImage関数を呼び出して画像データを処理します。
     function loadImage() {
@@ -176,6 +254,9 @@ const CubeMapApp = (() => {
             ctx.drawImage(img, 0, 0);
             const data = ctx.getImageData(0, 0, width, height);
 
+            const imagePreview = document.getElementById("imagePreview");
+            imagePreview.innerHTML = `<img src="${img.src}" alt="Uploaded Image" width="800" height="400">`;
+
             processImage(data);
         });
     }
@@ -185,8 +266,23 @@ const CubeMapApp = (() => {
     }
 
     function displayFileName(file) {
-        dom.fileNameDisplay.textContent = file.name;
-        loadedFileName = file.name.split(".")[0];
+        if (file) {
+            dom.fileNameDisplay.textContent = file.name;
+            dom.fileNameDisplay.className = 'fileNameDisplayClass'; 
+            loadedFileName = file.name.split(".")[0];
+            displayFileDimensions(file); 
+        } else {
+            clearFileName();
+        }
+    }
+    
+
+    function displayFileDimensions(file) {
+        const img = new Image();
+        img.onload = function() {
+            dom.fileWidthHeight.textContent = `${this.width} x ${this.height} px`;
+        };
+        img.src = URL.createObjectURL(file);
     }
 
     let finished = 0;
