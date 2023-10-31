@@ -1,10 +1,32 @@
 const CubeMapApp = (() => {
-    // 画像データの描画と操作に使用されるHTML canvas要素とその2Dコンテキストを作成します。
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
     let loadedFileName = "";
 
-    // 特定のIDを持つHTML要素をラップし、その要素が変更されたときに指定されたコールバック関数を呼び出します。
+    const mimeType = {
+        png: "image/png",
+    };
+
+    const dom = {
+        imageInput: document.getElementById("imageInput"),
+        dropzone: document.getElementById("dropzone"),
+        faces: document.getElementById("faces"),
+        generating: document.getElementById("generating"),
+        fileNameDisplay: document.getElementById("fileNameDisplay"),
+        fileWidthHeight: document.getElementById("fileWidthHeight"),
+        errorMessage: document.getElementById("errorMessage"),
+        downloadFileName: document.getElementById("downloadFileName"),
+    };
+
+    const facePositions = {
+        skyboxRt: { x: 1, y: 1 },
+        skyboxLf: { x: 3, y: 1 },
+        skyboxFt: { x: 2, y: 1 },
+        skyboxBk: { x: 0, y: 1 },
+        skyboxUp: { x: 1, y: 0 },
+        skyboxDn: { x: 1, y: 2 },
+    };
+
     class Input {
         constructor(id, onChange) {
             this.input = document.getElementById(id);
@@ -19,59 +41,20 @@ const CubeMapApp = (() => {
     }
 
     function updateDownloadFileName() {
-        removeChildren(dom.downloadFileName);  // Clear existing links
-    
-        const faces = dom.faces.querySelectorAll('a');
-        faces.forEach(face => {
-            // Get the last two characters from the filename (excluding the extension)
-            const faceIndicator = face.download.slice(-6, -4);
-            let positionText = "";
-            switch(faceIndicator) {
-                case "Rt":
-                    positionText = "Right:";
-                    break;
-                case "Lf":
-                    positionText = "Left:";
-                    break;
-                case "Ft":
-                    positionText = "Front:";
-                    break;
-                case "Bk":
-                    positionText = "Back:";
-                    break;
-                case "Up":
-                    positionText = "Up:";
-                    break;
-                case "Dn":
-                    positionText = "Down:";
-                    break;
-            }
-    
-            // Create a new div to hold the position text
-            const positionDiv = document.createElement('div');
-            positionDiv.textContent = positionText;
-            dom.downloadFileName.appendChild(positionDiv);
-    
-            // Create the download link
-            const link = document.createElement('a');
+        removeChildren(dom.downloadFileName);
+
+        const faces = dom.faces.querySelectorAll("a");
+        faces.forEach((face) => {
+            const link = document.createElement("a");
             link.href = face.href;
             link.download = face.download;
             link.textContent = face.download;
-            link.className = 'downloadLinkButton';  
-            link.style.display = 'block';  // Display links in a list
+            link.className = "downloadLinkButton";
+            link.style.display = "block";
             dom.downloadFileName.appendChild(link);
         });
     }
-    
-    
 
-
-
-
-
-
-
-    // キューブマップの各面を表現し、プレビューとダウンロードのリンクを作成します。
     class CubeFace {
         constructor(faceName) {
             this.faceName = faceName;
@@ -82,7 +65,6 @@ const CubeMapApp = (() => {
             this.img.style.filter = "blur(4px)";
             this.anchor.appendChild(this.img);
 
-            // マウスホバーイベントリスナーの追加
             this.anchor.addEventListener("mouseover", () => {
                 this.img.style.border = "2px solid white";
                 this.anchor.style.zIndex = "1";
@@ -93,7 +75,6 @@ const CubeMapApp = (() => {
                 this.anchor.style.zIndex = "";
                 this.hideFaceName();
             });
-            
         }
 
         setPreview(url, x, y) {
@@ -104,27 +85,19 @@ const CubeMapApp = (() => {
 
         setDownload(url) {
             this.anchor.href = url;
-            this.anchor.download = `${loadedFileName}_${this.faceName}.png`;
+            this.anchor.download = `${this.faceName}___${loadedFileName}.png`;
             this.img.style.filter = "";
             updateDownloadFileName();
         }
 
-        
         showFaceName(faceName) {
             this.label = document.createElement("div");
             this.label.textContent = faceName;
-            this.label.style.position = "absolute";
-            this.label.style.background = "rgba(0, 0, 0, 0.5)";
-            this.label.style.color = "white";
-            this.label.style.padding = "2px 5px";
-            this.label.style.borderRadius = "3px";
-            this.label.style.top = "10px";
-            this.label.style.left = "10px";
+            this.label.classList.add("cube-face-label");
             this.label.style.zIndex = "2";
             this.anchor.appendChild(this.label);
         }
 
-        // 新しいメソッドを追加してfaceNameを非表示にする
         hideFaceName() {
             if (this.label) {
                 this.anchor.removeChild(this.label);
@@ -133,13 +106,6 @@ const CubeMapApp = (() => {
         }
     }
 
-
-
-    const mimeType = {
-        png: "image/png",
-    };
-
-    // 画像データの処理
     async function getDataURL(imgData) {
         canvas.width = imgData.width;
         canvas.height = imgData.height;
@@ -153,44 +119,18 @@ const CubeMapApp = (() => {
         });
     }
 
-    // DOMの操作
     function removeChildren(node) {
         while (node.firstChild) {
             node.removeChild(node.firstChild);
         }
     }
 
-    // アプリケーションで使用される主要なDOM要素への参照を保持します。
-    const dom = {
-        imageInput: document.getElementById("imageInput"),
-        dropzone: document.getElementById("dropzone"),
-        faces: document.getElementById("faces"),
-        generating: document.getElementById("generating"),
-        fileNameDisplay: document.getElementById("fileNameDisplay"),
-        fileWidthHeight: document.getElementById("fileWidthHeight"),
-        errorMessage: document.getElementById("errorMessage"),
-        downloadFileName: document.getElementById("downloadFileName"),
-    };
-
-    // キューブの回転を制御するInputインスタンスを保持します。
     const settings = {
         cubeRotation: new Input("cubeRotation", loadImage),
     };
 
-    // キューブマップの各面の位置を定義します。
-    const facePositions = {
-        skyboxRt: { x: 1, y: 1 },
-        skyboxLf: { x: 3, y: 1 },
-        skyboxFt: { x: 2, y: 1 },
-        skyboxBk: { x: 0, y: 1 },
-        skyboxUp: { x: 1, y: 0 },
-        skyboxDn: { x: 1, y: 2 },
-    };
-
-    // ファイル選択のイベントリスナー
     dom.imageInput.addEventListener("change", loadImage);
 
-    // New drag and drop event listeners
     dom.dropzone.addEventListener("dragover", (event) => {
         event.preventDefault();
         dom.dropzone.classList.add("dragging");
@@ -232,13 +172,11 @@ const CubeMapApp = (() => {
 
     function clearFileName() {
         dom.fileNameDisplay.textContent = "";
-        dom.fileWidthHeight.textContent = ""; 
+        dom.fileWidthHeight.textContent = "";
     }
-
 
     document.addEventListener("DOMContentLoaded", clearError);
 
-    // アップロードされた画像を読み込み、processImage関数を呼び出して画像データを処理します。
     function loadImage() {
         const file = getFile();
         if (!file) return;
@@ -268,18 +206,17 @@ const CubeMapApp = (() => {
     function displayFileName(file) {
         if (file) {
             dom.fileNameDisplay.textContent = file.name;
-            dom.fileNameDisplay.className = 'fileNameDisplayClass'; 
+            dom.fileNameDisplay.className = "fileNameDisplayClass";
             loadedFileName = file.name.split(".")[0];
-            displayFileDimensions(file); 
+            displayFileDimensions(file);
         } else {
             clearFileName();
         }
     }
-    
 
     function displayFileDimensions(file) {
         const img = new Image();
-        img.onload = function() {
+        img.onload = function () {
             dom.fileWidthHeight.textContent = `${this.width} x ${this.height} px`;
         };
         img.src = URL.createObjectURL(file);
@@ -298,8 +235,6 @@ const CubeMapApp = (() => {
         });
     }
 
-    // 指定されたキューブ面をレンダリングし、プレビューとダウンロードリンクを作成します。
-    // Web Workerを使用して、画像変換処理を非同期に実行します。
     function renderFace(data, faceName, position) {
         const face = new CubeFace(faceName);
         dom.faces.appendChild(face.anchor);

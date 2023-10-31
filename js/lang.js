@@ -17,7 +17,7 @@ let lang = {
         line_2_3: "角度を入力すると正面の向きを変更できます：",
         title_3: "Roblox Studioで設定",
         line_3_1:
-            "Roblox Studioで、LightingのSkyに設定します。ファイル名の末尾とプロパティ名を合わせてください",
+            "Roblox StudioでLightingのSkyに設定します。ファイル名の先頭と、Skyのプロパティ名を合わせてください",
         error_multiple_files: "アップロードできるファイルはひとつだけです",
         error_not_image:
             "画像ファイル（PNG、JPEG、WebP）をアップロードしてください",
@@ -41,7 +41,7 @@ let lang = {
         line_2_3: "You can change the front direction by entering the angle:",
         title_3: "Setting in Roblox Studio",
         line_3_1:
-            "In Roblox Studio, set it to Lighting's Sky. Match the end of the filename with the property name.",
+            "Configure the Sky in Roblox Studio's Lighting to match the beginning of the file name with the Sky property name.",
         error_multiple_files: "Only one file can be uploaded.",
         error_not_image: "Please upload an image file.(PNG、JPEG、WebP)",
     },

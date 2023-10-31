@@ -87,3 +87,17 @@ a {
     white-space: normal; /* Add this line */
     word-break: break-all; /* Add this line */
 }
+
+
+
+/* Cube Face Label */
+.cube-face-label {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+}
