@@ -114,20 +114,25 @@
                         </ul>
                         <figure>
                             <div id="dropzone" class="dropzone-area">
-                                <label
-                                    for="imageInput"
-                                    class="custom-file-upload"
-                                    data-lang-key="line_1_4"
-                                >
-                                    ファイルを選択またはここにドラッグアンドドロップ
-                                </label>
-                                <input
-                                    id="imageInput"
-                                    type="file"
-                                    accept="image/*"
-                                    class="hidden-file-input"
-                                />
-
+                                <div>
+                                    <label
+                                        for="imageInput"
+                                        class="custom-file-upload"
+                                        data-lang-key="line_1_4"
+                                    >
+                                        ファイルを選択
+                                    </label>
+                                    <input
+                                        id="imageInput"
+                                        type="file"
+                                        accept="image/*"
+                                        class="hidden-file-input"
+                                    />
+                                    <span>&nbsp;/&nbsp;</span>
+                                    <span data-lang-key="line_1_5" class="pl-5">
+                                        ドラッグアンドドロップ
+                                    </span>
+                                </div>
                                 <div
                                     id="errorMessage"
                                     class="error-message"
@@ -138,7 +143,7 @@
                                 <div id="preview" class="bg-dark flex-shrink-0">
                                     <output id="imagePreview"></output>
                                 </div>
-                                <div class="ms-5 mt-2 text-wrap">
+                                <div class="ms-3 mt-3 text-wrap">
                                     <div>
                                         <div>File:</div>
                                         <div id="fileNameDisplay"></div>
@@ -164,7 +169,7 @@
                     </h5>
                     <div class="card-text">
                         <div class="card-text" data-lang-key="line_2_1">
-                            右のボタンから各面をダウンロードしてください
+                            右のリンクから各面をダウンロードしてください
                         </div>
 
                         <div class="d-flex text-wrap">

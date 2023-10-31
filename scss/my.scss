@@ -15,7 +15,7 @@
 
 .dropzone-area {
     border: 2px dashed white;
-    padding: 20px;
+    padding: 25px;
     text-align: center;
     transition: background-color 0.3s;
 
@@ -32,17 +32,13 @@
 }
 
 .custom-file-upload {
-    padding: 20px;
+    color: aqua;
     cursor: pointer;
-    border: 1px solid white;
-    border-bottom: 2px solid white;
-    border-right: 2px solid white;
+    // border: 1px solid white;
+    // border-bottom: 2px solid white;
+    // border-right: 2px solid white;
     display: inline-block;
-    transition: background-color 0.3s;
-}
-.custom-file-upload:hover {
-    color: black;
-    background-color: white;
+    // transition: background-color 0.3s;
 }
 
 .error-message {
@@ -75,27 +71,16 @@ a {
     text-decoration: none;
 }
 
+
 .downloadLinkButton {
-    color: white;
-    border: 1px solid white;
-    border-bottom: 2px solid white;
-    border-right: 2px solid white;
-    padding: 10px;
     text-decoration: none;
     cursor: pointer;
     margin-bottom: 10px;
-    transition: background-color 0.3s;
     word-wrap: break-word; /* Add this line */
     overflow-wrap: break-word; /* Add this line */
     white-space: normal; /* Add this line */
     word-break: break-all; /* Add this line */
-
-    &:hover {
-        color: black;
-        background-color: white;
-    }
 }
-
 .fileNameDisplayClass {
     word-wrap: break-word; /* Add this line */
     overflow-wrap: break-word; /* Add this line */
