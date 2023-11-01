@@ -1,0 +1,104 @@
+{
+    "fonts": [
+        {
+            "family": "Source Sans",
+            "styles": ["Regular", "Semibold", "Bold", "Light", "Italic"]
+        },
+        {
+            "family": "Libre Bodoni",
+            "styles": []
+        },
+        {
+            "family": "Cormorant Garamond",
+            "styles": []
+        },
+        {
+            "family": "Amatic SC",
+            "styles": []
+        },
+        {
+            "family": "Bangers",
+            "styles": []
+        },
+        {
+            "family": "Creepster",
+            "styles": []
+        },
+        {
+            "family": "Denk One",
+            "styles": []
+        },
+        {
+            "family": "Fondamento",
+            "styles": []
+        },
+        {
+            "family": "Grenze Gotisch",
+            "styles": []
+        },
+        {
+            "family": "Indie Flower",
+            "styles": []
+        },
+        {
+            "family": "Josefin Sans",
+            "styles": []
+        },
+        {
+            "family": "Jura",
+            "styles": []
+        },
+        {
+            "family": "Kalam",
+            "styles": []
+        },
+        {
+            "family": "Luckiest Guy",
+            "styles": []
+        },
+        {
+            "family": "Merriweather",
+            "styles": []
+        },
+        {
+            "family": "Michroma",
+            "styles": []
+        },
+        {
+            "family": "Nunito",
+            "styles": []
+        },
+        {
+            "family": "Oswald",
+            "styles": []
+        },
+        {
+            "family": "Patrick Hand",
+            "styles": []
+        },
+        {
+            "family": "Permanent Marker",
+            "styles": []
+        },
+        {
+            "family": "Roboto",
+            "styles": ["Regular", "Condensed", "Mono"]
+        },
+        {
+            "family": "Sarpanch",
+            "styles": []
+        },
+        {
+            "family": "Special Elite",
+            "styles": []
+        },
+        {
+            "family": "Titillium Web",
+            "styles": []
+        },
+        {
+            "family": "Ubuntu",
+            "styles": []
+        }
+    ]
+}
