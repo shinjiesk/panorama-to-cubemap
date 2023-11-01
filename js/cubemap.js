@@ -15,16 +15,15 @@ const CubeMapApp = (() => {
         fileNameDisplay: document.getElementById("fileNameDisplay"),
         fileWidthHeight: document.getElementById("fileWidthHeight"),
         errorMessage: document.getElementById("errorMessage"),
-        downloadFileName: document.getElementById("downloadFileName"),
     };
 
     const facePositions = {
-        skyboxRt: { x: 1, y: 1 },
-        skyboxLf: { x: 3, y: 1 },
-        skyboxFt: { x: 2, y: 1 },
-        skyboxBk: { x: 0, y: 1 },
-        skyboxUp: { x: 1, y: 0 },
-        skyboxDn: { x: 1, y: 2 },
+        Rt: { x: 1, y: 1 },
+        Lf: { x: 3, y: 1 },
+        Ft: { x: 2, y: 1 },
+        Bk: { x: 0, y: 1 },
+        Up: { x: 1, y: 0 },
+        Dn: { x: 1, y: 2 },
     };
 
     class Input {
@@ -41,19 +40,31 @@ const CubeMapApp = (() => {
     }
 
     function updateDownloadFileName() {
-        removeChildren(dom.downloadFileName);
-
         const faces = dom.faces.querySelectorAll("a");
         faces.forEach((face) => {
             const link = document.createElement("a");
             link.href = face.href;
             link.download = face.download;
             link.textContent = face.download;
-            link.className = "downloadLinkButton";
-            link.style.display = "block";
-            dom.downloadFileName.appendChild(link);
+            // link.style.display = "block";
+    
+            // ファイル名の先頭2文字を取得
+            const fileId = face.download.slice(0, 2);
+    
+            // 対応するIDの子要素にリンクをアペンド
+            const parentElement = document.getElementById(fileId);
+            if (parentElement) {
+                // 既存の子要素を削除
+                while (parentElement.firstChild) {
+                    parentElement.removeChild(parentElement.firstChild);
+                }
+                // 新しいリンクをアペンド
+                parentElement.appendChild(link);
+            }
         });
     }
+    
+
 
     class CubeFace {
         constructor(faceName) {
@@ -85,7 +96,7 @@ const CubeMapApp = (() => {
 
         setDownload(url) {
             this.anchor.href = url;
-            this.anchor.download = `${this.faceName}___${loadedFileName}.png`;
+            this.anchor.download = `${this.faceName}_${loadedFileName}.png`;
             this.img.style.filter = "";
             updateDownloadFileName();
         }
@@ -145,14 +156,8 @@ const CubeMapApp = (() => {
         dom.dropzone.classList.remove("dragging");
 
         const files = event.dataTransfer.files;
-        if (files.length > 1) {
-            showError("error_multiple_files");
-            clearFileName();
-            return;
-        }
-
-        const file = files[0];
-        if (file && file.type.startsWith("image/")) {
+        const file = files?.[0];
+        if (file?.type.startsWith("image/")) {
             dom.imageInput.files = event.dataTransfer.files;
             loadImage();
             clearError();

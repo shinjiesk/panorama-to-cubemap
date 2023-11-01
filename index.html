@@ -129,8 +129,8 @@
                                         class="hidden-file-input"
                                     />
                                     <span>&nbsp;/&nbsp;</span>
-                                    <span data-lang-key="line_1_5" class="pl-5">
-                                        ドラッグアンドドロップ
+                                    <span data-lang-key="line_1_5" class="pl-5 drag-drop-text">
+                                        ここにドラッグアンドドロップ
                                     </span>
                                 </div>
                                 <div
@@ -145,11 +145,18 @@
                                 </div>
                                 <div class="ms-3 mt-3 text-wrap">
                                     <div>
-                                        <div>File:</div>
+                                        <div data-lang-key="line_1_6">
+                                            ファイル名:
+                                        </div>
                                         <div id="fileNameDisplay"></div>
                                     </div>
                                     <div>
-                                        <div class="mt-5">Width x Height:</div>
+                                        <div
+                                            class="mt-5"
+                                            data-lang-key="line_1_7"
+                                        >
+                                            横 x 縦:
+                                        </div>
                                         <div id="fileWidthHeight"></div>
                                     </div>
                                 </div>
@@ -169,7 +176,7 @@
                     </h5>
                     <div class="card-text">
                         <div class="card-text" data-lang-key="line_2_1">
-                            右のリンクから各面をダウンロードしてください
+                            右のリンクをクリックして、各ファイルをダウンロードしてください
                         </div>
 
                         <div class="d-flex text-wrap">
@@ -183,7 +190,18 @@
                                 <output id="faces"></output>
                             </div>
                             <div class="ms-5 mt-2 text-wrap">
-                                <div id="downloadFileName"></div>
+                                <div data-lang-key="line_2_4">右面:</div>
+                                <div id="Rt" class="downloadLinkButton">&nbsp;</div>
+                                <div data-lang-key="line_2_5">左面:</div>
+                                <div id="Lf" class="downloadLinkButton">&nbsp;</div>
+                                <div data-lang-key="line_2_6">前面:</div>
+                                <div id="Ft" class="downloadLinkButton">&nbsp;</div>
+                                <div data-lang-key="line_2_7">後面:</div>
+                                <div id="Bk" class="downloadLinkButton">&nbsp;</div>
+                                <div data-lang-key="line_2_8">上面:</div>
+                                <div id="Up" class="downloadLinkButton">&nbsp;</div>
+                                <div data-lang-key="line_2_9">下面:</div>
+                                <div id="Dn" class="downloadLinkButton">&nbsp;</div>
                             </div>
                         </div>
 
@@ -263,8 +281,6 @@
                 url: "/upload", // Replace with your upload URL
                 maxFilesize: 10, // Maximum filesize in MB
                 acceptedFiles: "image/*",
-                dictDefaultMessage:
-                    "";
             };
         </script>
     </body>

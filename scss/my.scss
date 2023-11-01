@@ -1,3 +1,6 @@
+$link-color: #7af;
+$link-hover-color: #aef;
+
 #cubemap {
     width: 800px;
     height: 600px;
@@ -17,12 +20,15 @@
     border: 2px dashed white;
     padding: 25px;
     text-align: center;
-    transition: background-color 0.3s;
 
     &.dragging {
         background-color: white;
 
         .custom-file-upload {
+            color: black;
+        }
+
+        .drag-drop-text{
             color: black;
         }
     }
@@ -32,13 +38,13 @@
 }
 
 .custom-file-upload {
-    color: aqua;
+    color: $link-color;
     cursor: pointer;
-    // border: 1px solid white;
-    // border-bottom: 2px solid white;
-    // border-right: 2px solid white;
     display: inline-block;
-    // transition: background-color 0.3s;
+
+    &:hover {
+        color: $link-hover-color;
+    }
 }
 
 .error-message {
@@ -58,17 +64,11 @@
     text-decoration: none;
     cursor: pointer;
     margin-right: 5px;
-    transition: background-color 0.3s;
 
     &:hover {
         color: black;
         background-color: white;
     }
-}
-
-a {
-    color: aqua;
-    text-decoration: none;
 }
 
 
@@ -100,4 +100,14 @@ a {
     top: 10px;
     left: 10px;
     z-index: 2;
+}
+
+
+a {
+    color: $link-color;
+    text-decoration: none;
+
+    &:hover {
+        color: $link-hover-color;
+    }
 }
