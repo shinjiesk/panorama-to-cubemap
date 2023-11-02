@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,235 +13,78 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
-        <title>Document</title>
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/my.css" />
+        <title>Font Selector</title>
         <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-        <script>
-            WebFont.load({
-                google: {
-                    families: [
-                        "Source Sans 3:300,400,400i,600,700",
-                        "Libre Bodoni",
-                        "Cormorant Garamond",
-                        "Amatic SC",
-                        "Bangers",
-                        "Creepster",
-                        "Denk One",
-                        "Fondamento",
-                        "Grenze Gotisch",
-                        "Indie Flower",
-                        "Josefin Sans",
-                        "Jura",
-                        "Kalam",
-                        "Luckiest Guy",
-                        "Merriweather",
-                        "Michroma",
-                        "Nunito",
-                        "Oswald",
-                        "Patrick Hand",
-                        "Permanent Marker",
-                        "Roboto",
-                        "Roboto Condensed",
-                        "Roboto Mono",
-                        "Sarpanch",
-                        "Special Elite",
-                        "Titillium Web",
-                        "Ubuntu",
-                    ],
-                },
-            });
-        </script>
-
-
-
-
-
-
-        <style>
-            #fonts > div {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                margin: 10px;
-                padding: 10px;
-                border: 1px solid #fff;
-                border-radius: 5px;
-            }
-            #fonts > div > div:first-child {
-                font-size: 12px;
-            }
-            #fonts > div > div:last-child {
-                font-size: 100px;
-            }
-        </style>
+        <script src="js/load-fonts.js"></script>
     </head>
-    <body>
-        <h1>Roblox フォントセレクター</h1>
-        <form action="#" method="post">
-            <input type="text" name="text" id="text" value="Sample Text" />
-            <input
-                type="number"
-                name="fontsize"
-                id="fontsize"
-                min="12"
-                max="200"
-                value="100"
-            />
-            <input type="submit" value="決定" />
-        </form>
-        <div id="fonts">
-            <div>
-                <div>Source Sans (3)</div>
-                <div style="font-family: 'Source Sans 3'; font-weight: 400">
-                    Sample Text
+    <body class="bg-black">
+        <div class="container px-3 mx-auto">
+            <header class="p-3 text-white">
+                <div
+                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+                >
+                    <div data-lang-key="header_title">
+                        Roblox フォントセレクター
+                    </div>
+                    <div
+                        class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+                    ></div>
+                    <div class="text-end">
+                        <a class="language-link" onclick="changeLanguage('en')"
+                            >English</a
+                        >
+                        <a class="language-link" onclick="changeLanguage('jp')"
+                            >日本語</a
+                        >
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div>Source Sans Bold (4)</div>
-                <div style="font-family: 'Source Sans 3'; font-weight: 700">
-                    Sample Text
-                </div>
-            </div>
-            <div>
-                <div>Source Sans Light (5)</div>
-                <div style="font-family: 'Source Sans 3'; font-weight: 300">
-                    Sample Text
-                </div>
-            </div>
-            <div>
-                <div>Source Sans Italic (6)</div>
-                <div style="font-family: 'Source Sans 3'; font-style: italic">
-                    Sample Text
-                </div>
-            </div>
-            <div>
-                <div>Bodoni (7)</div>
-                <div style="font-family: 'Libre Bodoni'">Sample Text</div>
-            </div>
-            <div>
-                <div>Garamond (8)</div>
-                <div style="font-family: 'Cormorant Garamond'">Sample Text</div>
-            </div>
-            <div>
-                <div>Source Sans Semibold (16)</div>
-                <div style="font-family: 'Source Sans 3'; font-weight: 600">
-                    Sample Text
-                </div>
-            </div>
-            <div>
-                <div>Amatic SC (21)</div>
-                <div style="font-family: 'Amatic SC'">Sample Text</div>
-            </div>
-            <div>
-                <div>Bangers (22)</div>
-                <div style="font-family: 'Bangers'">Sample Text</div>
-            </div>
-            <div>
-                <div>Creepster (23)</div>
-                <div style="font-family: 'Creepster'">Sample Text</div>
-            </div>
-            <div>
-                <div>Denk One (24)</div>
-                <div style="font-family: 'Denk One'">Sample Text</div>
-            </div>
-            <div>
-                <div>Fondamento (25)</div>
-                <div style="font-family: 'Fondamento'">Sample Text</div>
-            </div>
-            <div>
-                <div>Grenze Gotisch (27)</div>
-                <div style="font-family: 'Grenze Gotisch'">Sample Text</div>
-            </div>
-            <div>
-                <div>Indie Flower (28)</div>
-                <div style="font-family: 'Indie Flower'">Sample Text</div>
-            </div>
-            <div>
-                <div>Josefin Sans (29)</div>
-                <div style="font-family: 'Josefin Sans'">Sample Text</div>
-            </div>
-            <div>
-                <div>Jura (30)</div>
-                <div style="font-family: 'Jura'">Sample Text</div>
-            </div>
-            <div>
-                <div>Kalam (31)</div>
-                <div style="font-family: 'Kalam'">Sample Text</div>
-            </div>
-            <div>
-                <div>Luckiest Guy (32)</div>
-                <div style="font-family: 'Luckiest Guy'">Sample Text</div>
-            </div>
-            <div>
-                <div>Merriweather (33)</div>
-                <div style="font-family: 'Merriweather'">Sample Text</div>
-            </div>
-            <div>
-                <div>Michroma (34)</div>
-                <div style="font-family: 'Michroma'">Sample Text</div>
-            </div>
-            <div>
-                <div>Nunito (35)</div>
-                <div style="font-family: 'Nunito'">Sample Text</div>
-            </div>
-            <div>
-                <div>Oswald (36)</div>
-                <div style="font-family: 'Oswald'">Sample Text</div>
-            </div>
-            <div>
-                <div>Patrick Hand (37)</div>
-                <div style="font-family: 'Patrick Hand'">Sample Text</div>
-            </div>
-            <div>
-                <div>Permanent Marker< (38)</div>
-                <div style="font-family: 'Permanent Marker'">Sample Text</div>
-            </div>
-            <div>
-                <div>Roboto (39)</div>
-                <div style="font-family: 'Roboto'">Sample Text</div>
-            </div>
-            <div>
-                <div>Roboto Condensed (40)</div>
-                <div style="font-family: 'Roboto Condensed'">Sample Text</div>
-            </div>
-            <div>
-                <div>Roboto Mono (41)</div>
-                <div style="font-family: 'Roboto Mono'">Sample Text</div>
-            </div>
-            <div>
-                <div>Sarpanch (42)</div>
-                <div style="font-family: 'Sarpanch'">Sample Text</div>
-            </div>
-            <div>
-                <div>Special Elite (43)</div>
-                <div style="font-family: 'Special Elite'">Sample Text</div>
-            </div>
-            <div>
-                <div>Titillium Web (44)</div>
-                <div style="font-family: 'Titillium Web'">Sample Text</div>
-            </div>
-            <div>
-                <div>Ubuntu (45)</div>
-                <div style="font-family: 'Ubuntu'">Sample Text</div>
-            </div>
-        </div>
-        <script>
-            const form = document.querySelector("form");
-            const input = document.querySelector("#text");
-            const fontSizeInput = document.querySelector("#fontsize");
-            const fonts = document.querySelectorAll(
-                "#fonts > div > div:last-child"
-            );
+            </header>
+            <!--- ============================================= -->
 
-            form.addEventListener("submit", (event) => {
-                event.preventDefault();
-                const text = input.value;
-                const fontSize = fontSizeInput.value;
-                fonts.forEach((font) => {
-                    font.textContent = text;
-                    font.style.fontSize = `${fontSize}px`;
-                });
-            });
-        </script>
+            <div class="px-4 pt-5 pb-5 text-center text-white">
+                <h1 class="display-4 fw-bold" data-lang-key="hero_title">
+                    Roblox フォントセレクター
+                </h1>
+                <div class="col-lg-6 mx-auto" data-lang-key="hero_subtitle">
+                    Roblox
+                    Studioに用意されているフォントで任意のテキストをプレビューできます
+                </div>
+            </div>
+
+            <!--- =========================================== -->
+
+            <form id="font-form">
+                <input type="text" name="text" id="text" value="Sample Text" />
+                <input
+                    type="number"
+                    name="fontsize"
+                    id="fontsize"
+                    min="12"
+                    max="200"
+                    value="100"
+                />
+                <button type="submit">決定</button>
+            </form>
+
+            <!--- =========================================== -->
+
+            <div id="fonts"></div>
+        </div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+        <script src="./js/make-fontcard.js"></script>
+        <!-- 
+            <div id="fonts">
+                <div class="font-name">Source Sans Bold (4)</div>
+                <div class="font-sample" style="font-family: 'Source Sans 3'; font-weight: 700">Sample Text</div>
+            </div>
+        -->
+        <script src="./js/scripts.js"></script>
     </body>
 </html>

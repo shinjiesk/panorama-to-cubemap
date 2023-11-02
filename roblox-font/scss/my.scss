@@ -1,0 +1,44 @@
+$link-color: #7af;
+$link-hover-color: #aef;
+
+.font-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.font-name {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.font-sample {
+    font-size: 100px;
+    text-align: center;
+}
+
+.bg-black {
+    background-color: #151515 !important;
+}
+
+.language-link {
+    color: white;
+    border: 1px solid white;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    padding: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 5px;
+
+    &:hover {
+        color: black;
+        background-color: white;
+    }
+}
