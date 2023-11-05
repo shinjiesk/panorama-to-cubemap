@@ -51,7 +51,7 @@ class CubeFace {
             const fileId = face.download.slice(0, 2);
 
             // 対応するIDの子要素にリンクをアペンド
-            appendLink(fileId, link);
+            this.appendLink(fileId, link);
         });
     }
 
