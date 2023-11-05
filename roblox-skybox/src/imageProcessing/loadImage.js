@@ -5,10 +5,6 @@ import { processImage } from './processImage.js';
 // ------------------------------------------------------------
 // 画像をフォームから取得して、ファイル名を表示、画像を表示してから処理を実行する
 // ------------------------------------------------------------
-// キャンバスと2Dコンテキストの作成
-const canvas = document.createElement("canvas");
-canvas.willReadFrequently = true;
-const ctx = canvas.getContext("2d");
 
 dom.imageInput.addEventListener("change", loadImage);
 
@@ -21,19 +17,16 @@ export function loadImage() {
     displayFileName(file);
 
     const img = new Image();
-
     img.src = URL.createObjectURL(file);
 
     // 画像のロードが完了したら処理を実行する
     img.addEventListener("load", async () => {
         const { width, height } = img;
-        canvas.width = width;
-        canvas.height = height;
-        ctx.drawImage(img, 0, 0);
-        const data = ctx.getImageData(0, 0, width, height);
-
-        const imagePreview = document.getElementById("imagePreview");
-        imagePreview.innerHTML = `<img src="${img.src}" alt="Uploaded Image" width="800" height="400">`;
+        dom.canvas.width = width;
+        dom.canvas.height = height;
+        dom.ctx.drawImage(img, 0, 0);
+        const data = dom.ctx.getImageData(0, 0, width, height);
+        dom.imagePreview.innerHTML = `<img src="${img.src}" alt="Uploaded Image" width="800" height="400">`;
 
         processImage(data);
     });

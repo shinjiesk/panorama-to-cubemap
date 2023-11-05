@@ -6,4 +6,9 @@ export const dom = {
     fileNameDisplay: document.getElementById("fileNameDisplay"),
     fileWidthHeight: document.getElementById("fileWidthHeight"),
     errorMessage: document.getElementById("errorMessage"),
+    canvas: document.createElement("canvas"),
+    imagePreview: document.getElementById("imagePreview"),
 };
+
+dom.canvas.willReadFrequently = true;
+dom.ctx = dom.canvas.getContext("2d");

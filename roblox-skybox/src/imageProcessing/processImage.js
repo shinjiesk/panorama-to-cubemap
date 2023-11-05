@@ -1,6 +1,5 @@
 import { dom } from "../dom/dom.js";
 import CubeFace from "../cubeMapProcessing/CubeFace.js";
-import { getDataURL } from "../utilities/utilities.js";
 
 // ------------------------------------------------------------
 // 新しい画像がロードされるたびにキューブマップの各面をクリーンアップし、処理を開始し、レンダリングする
@@ -9,18 +8,17 @@ import { getDataURL } from "../utilities/utilities.js";
 let finished = 0;
 let workers = [];
 
-// キューブマップの各面の位置を定義するオブジェクト
-const facePositions = {
-    Rt: { x: 1, y: 1 },
-    Lf: { x: 3, y: 1 },
-    Ft: { x: 2, y: 1 },
-    Bk: { x: 0, y: 1 },
-    Up: { x: 1, y: 0 },
-    Dn: { x: 1, y: 2 },
-};
-
 // 画像データを処理する関数
 export function processImage(data) {
+    // キューブマップの各面の位置を定義するオブジェクト
+    const facePositions = {
+        Rt: { x: 1, y: 1 },
+        Lf: { x: 3, y: 1 },
+        Ft: { x: 2, y: 1 },
+        Bk: { x: 0, y: 1 },
+        Up: { x: 1, y: 0 },
+        Dn: { x: 1, y: 2 },
+    };
     // 6面を消す
     dom.faces.innerHTML = "";
 
@@ -96,4 +94,20 @@ function renderFace(data, faceName, position) {
     // 新しいWeb Workerインスタンスをworkers配列に追加
     // (後で全てのWeb Workerインスタンスを終了できるように)
     workers.push(worker);
+
+    // 画像データをURLに変換する関数
+    function getDataURL(imgData) {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = imgData.width;
+        canvas.height = imgData.height;
+        ctx.putImageData(imgData, 0, 0);
+        return new Promise((resolve) => {
+            canvas.toBlob(
+                (blob) => resolve(URL.createObjectURL(blob)),
+                "image/png",
+                0.92
+            );
+        });
+    }
 }

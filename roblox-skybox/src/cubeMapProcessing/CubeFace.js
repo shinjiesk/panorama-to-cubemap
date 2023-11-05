@@ -1,5 +1,5 @@
 import { dom } from "../dom/dom.js";
-import  fileInfo  from "../utilities/fileInfo.js";
+import fileInfo from "../utilities/fileInfo.js";
 
 // ------------------------------------------------------------
 // キューブの各面を表現するクラス
@@ -32,10 +32,8 @@ class CubeFace {
         this.anchor.href = url;
         // ダウンロードファイル名を生成
         this.anchor.download = `${this.faceName}_${fileInfo.getFileName()}.png`;
-
         // 画像のフィルターをクリア
         this.img.style.filter = "";
-
         // ダウンロードファイル名を更新
         this.updateDownloadLinks();
     }
@@ -53,16 +51,19 @@ class CubeFace {
             const fileId = face.download.slice(0, 2);
 
             // 対応するIDの子要素にリンクをアペンド
-            const parentElement = document.getElementById(fileId);
-            if (parentElement) {
-                // 既存の子要素を削除
-                while (parentElement.firstChild) {
-                    parentElement.removeChild(parentElement.firstChild);
-                }
-                // 新しいリンクをアペンド
-                parentElement.appendChild(link);
-            }
+            appendLink(fileId, link);
         });
+    }
+
+    // 対応するIDの子要素にリンクをアペンドする関数
+    appendLink(fileId, link) {
+        const parentElement = document.getElementById(fileId);
+        if (parentElement) {
+            // 既存の子要素を削除
+            parentElement.innerHTML = "";
+            // 新しいリンクをアペンド
+            parentElement.appendChild(link);
+        }
     }
 }
 export default CubeFace;

@@ -1,6 +1,7 @@
 import { showError, clearError } from '../errorHandling/errorHandling.js';
 import { dom } from "../dom/dom.js";
 import { loadImage } from '../imageProcessing/loadImage.js';
+import fileInfo from "../utilities/fileInfo.js";
 
 
 // ------------------------------------------------------------
