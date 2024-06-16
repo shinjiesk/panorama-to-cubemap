@@ -1,162 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
     <head>
         <meta charset="utf-8" />
-        <meta
-            name="description"
-            content="360°パノラマ画像をRobroxの6面スカイボックス画像に変換します"
-        />
+        <meta name="description" content="360°パノラマ画像をRobroxの6面スカイボックス画像に変換します" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
-        />
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
+
+        <!-- OGP Meta Tags -->
+        <meta property="og:title" content="Roblox パノラマ to スカイ" />
+        <meta property="og:description" content="360°パノラマ画像をRobroxの6面スカイボックス画像に変換します" />
+        <meta property="og:image" content="../image/OGP.png" />
+        <meta property="og:url" content="https://shinjiesk.github.io/panorama-to-cubemap/roblox-skybox/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="ja_JP" />
+        
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Roblox パノラマ to スカイ" />
+        <meta name="twitter:description" content="360°パノラマ画像をRobroxの6面スカイボックス画像に変換します" />
+        <meta name="twitter:image" content="../image/OGP.png" />
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="css/styles.css" />
         <link rel="stylesheet" href="css/my.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css"
-        />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
-
+        <style>
+            body {
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                background-color: black; /* 初期背景色を黒に設定 */
+            }
+        </style>
         <title>Roblox パノラマ to スカイ</title>
         <!-- Google tag (gtag.js) --->
-        <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-JLYTQ9JEPH"
-        ></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-JLYTQ9JEPH"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag() {
                 dataLayer.push(arguments);
             }
             gtag("js", new Date());
-
             gtag("config", "G-JLYTQ9JEPH");
+
+            function setInitialLanguage() {
+                const preferredLanguage = localStorage.getItem('preferredLanguage');
+                if (preferredLanguage) {
+                    document.documentElement.lang = preferredLanguage;
+                } else {
+                    document.documentElement.lang = 'jp'; // デフォルトの言語
+                }
+            }
+            setInitialLanguage();
         </script>
         <!-- /Google tag (gtag.js) --->
     </head>
-
-    <body class="bg-black">
+    <body class="bg-black" onload="initializePage()">
         <div class="container px-3 mx-auto">
             <header class="p-3 text-white">
-                <div
-                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-                >
-                    <div data-lang-key="header_title">
-                        パノラマ to Robloxスカイボックス
-                    </div>
-                    <div
-                        class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
-                    ></div>
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <div id="header_title" data-lang-key="header_title">パノラマ to Robloxスカイボックス</div>
+                    <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"></div>
                     <div class="text-end">
-                        <a class="language-link" onclick="changeLanguage('en')"
-                            >English</a
-                        >
-                        <a class="language-link" onclick="changeLanguage('jp')"
-                            >日本語</a
-                        >
+                        <a class="language-link" onclick="changeLanguage('en')">English</a>
+                        <a class="language-link" onclick="changeLanguage('jp')">日本語</a>
                     </div>
                 </div>
             </header>
             <!--- ============================================= -->
-
             <div class="px-4 pt-5 pb-5 text-center text-white">
-                <h1 class="display-4 fw-bold" data-lang-key="hero_title">
-                    パノラマ to Robloxスカイボックス
-                </h1>
-                <div class="col-lg-6 mx-auto" data-lang-key="hero_subtitle">
-                    360°パノラマ画像をRobroxの6面スカイボックス画像に変換します
-                </div>
+                <h1 id="hero_title" class="display-4 fw-bold" data-lang-key="hero_title">パノラマ to Robloxスカイボックス</h1>
+                <div class="col-lg-6 mx-auto" id="hero_subtitle" data-lang-key="hero_subtitle">360°パノラマ画像をRobroxの6面スカイボックス画像に変換します</div>
             </div>
-
             <!--- =========================================== -->
-
             <div class="card mt-4 bg-black text-white border-light">
                 <h2 class="card-header">1</h2>
                 <div class="card-body">
-                    <h5 class="card-title" data-lang-key="title_1">
-                        パノラマ画像をアップロード
-                    </h5>
+                    <h5 id="title_1" class="card-title" data-lang-key="title_1">パノラマ画像をアップロード</h5>
                     <div class="card-text">
                         <ul>
-                            <li data-lang-key="line_1_1">
-                                縦横比が1:2の等角円筒図法のパノラマ画像
+                            <li id="line_1_1" data-lang-key="line_1_1">縦横比が1:2の等角円筒図法のパノマラ画像</li>
+                            <li>
+                                <span id="line_1_2" data-lang-key="line_1_2">画像フォーマットはPNG、JPEG、WebPに対応。EXR、HDRには非対応です。変換するには：</span>
+                                <a href="https://convertio.co/ja/" target="_blank" rel="noopener noreferrer">Convertio.co</a>
                             </li>
                             <li>
-                                <span data-lang-key="line_1_2">
-                                    画像フォーマットはPNG、JPEG、WebPに対応。EXR、HDRには非対応です。変換するには：
-                                </span>
-                                <a
-                                    href="https://convertio.co/ja/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    >Convertio.co</a
-                                >
-                            </li>
-                            <li>
-                                <span data-lang-key="line_1_3">
-                                    パノラマ画像の入手は：
-                                </span>
-                                <a
-                                    href="https://polyhaven.com/hdris"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    >Poly Haven</a
-                                >
+                                <span id="line_1_3" data-lang-key="line_1_3">パノラマ画像の入手は：</span>
+                                <a href="https://polyhaven.com/hdris" target="_blank" rel="noopener noreferrer">Poly Haven</a>
                             </li>
                         </ul>
                         <figure>
                             <div id="dropzone" class="dropzone-area">
                                 <div>
-                                    <label
-                                        for="imageInput"
-                                        class="custom-file-upload"
-                                        data-lang-key="line_1_4"
-                                    >
-                                        ファイルを選択
-                                    </label>
-                                    <input
-                                        id="imageInput"
-                                        type="file"
-                                        accept="image/*"
-                                        class="hidden-file-input"
-                                    />
+                                    <label for="imageInput" class="custom-file-upload" id="line_1_4" data-lang-key="line_1_4">ファイルを選択</label>
+                                    <input id="imageInput" type="file" accept="image/*" class="hidden-file-input" />
                                     <span>&nbsp;/&nbsp;</span>
-                                    <span data-lang-key="line_1_5" class="pl-5 drag-drop-text">
-                                        ここにドラッグアンドドロップ
-                                    </span>
+                                    <span id="line_1_5" data-lang-key="line_1_5" class="pl-5 drag-drop-text">ここにドラッグアンドドロップ</span>
                                 </div>
-                                <div
-                                    id="errorMessage"
-                                    class="error-message"
-                                ></div>
+                                <div id="errorMessage" class="error-message"></div>
                             </div>
-
                             <div class="d-flex text-wrap">
                                 <div id="preview" class="bg-dark flex-shrink-0">
                                     <output id="imagePreview"></output>
                                 </div>
                                 <div class="ms-3 mt-3 text-wrap">
                                     <div>
-                                        <div data-lang-key="line_1_6">
-                                            ファイル名:
-                                        </div>
+                                        <div id="line_1_6" data-lang-key="line_1_6">ファイル名:</div>
                                         <div id="fileNameDisplay"></div>
                                     </div>
                                     <div>
-                                        <div
-                                            class="mt-5"
-                                            data-lang-key="line_1_7"
-                                        >
-                                            横 x 縦:
-                                        </div>
+                                        <div class="mt-5" id="line_1_7" data-lang-key="line_1_7">横 x 縦:</div>
                                         <div id="fileWidthHeight"></div>
                                     </div>
                                 </div>
@@ -165,102 +118,173 @@
                     </div>
                 </div>
             </div>
-
             <!--- ============================================= -->
-
             <div class="card mt-4 bg-black text-white border-light">
                 <h2 class="card-header">2</h2>
                 <div class="card-body">
-                    <h5 class="card-title" data-lang-key="title_2">
-                        ダウンロード
-                    </h5>
+                    <h5 id="title_2" class="card-title" data-lang-key="title_2">ダウンロード</h5>
                     <div class="card-text">
-                        <div class="card-text" data-lang-key="line_2_1">
-                            右のリンクをクリックして、各ファイルをダウンロードしてください
-                        </div>
-
+                        <div class="card-text" id="line_2_1" data-lang-key="line_2_1">右のリンクをクリックして、各ファイルをダウンロードしてください</div>
                         <div class="d-flex text-wrap">
                             <div id="cubemap" class="bg-dark flex-shrink-0">
-                                <b
-                                    id="generating"
-                                    style="visibility: hidden"
-                                    data-lang-key="line_2_2"
-                                    >生成中...</b
-                                >
+                                <b id="generating" style="visibility: hidden" data-lang-key="line_2_2">生成中...</b>
                                 <output id="faces"></output>
                             </div>
                             <div class="ms-5 mt-2 text-wrap">
-                                <div data-lang-key="line_2_4">右面:</div>
+                                <div class="card bg-dark border-white text-white mt-2 mb-4">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="form-group row">
+                                                <div class="col-auto">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="options" id="option1" value="prefix" onclick="updateFileNamesAndSave()" />
+                                                        <label id="line_2_10" data-lang-key="line_2_10" class="form-check-label" for="option1">記号＋ファイル名</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="options" id="option2" value="suffix" onclick="updateFileNamesAndSave()" checked />
+                                                        <label id="line_2_11" data-lang-key="line_2_11" class="form-check-label" for="suffix">ファイル名＋記号</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div id="line_2_4" data-lang-key="line_2_4">右面:</div>
                                 <div id="Rt" class="downloadLinkButton">&nbsp;</div>
-                                <div data-lang-key="line_2_5">左面:</div>
+                                <div id="line_2_5" data-lang-key="line_2_5">左面:</div>
                                 <div id="Lf" class="downloadLinkButton">&nbsp;</div>
-                                <div data-lang-key="line_2_6">前面:</div>
+                                <div id="line_2_6" data-lang-key="line_2_6">前面:</div>
                                 <div id="Ft" class="downloadLinkButton">&nbsp;</div>
-                                <div data-lang-key="line_2_7">後面:</div>
+                                <div id="line_2_7" data-lang-key="line_2_7">後面:</div>
                                 <div id="Bk" class="downloadLinkButton">&nbsp;</div>
-                                <div data-lang-key="line_2_8">上面:</div>
+                                <div id="line_2_8" data-lang-key="line_2_8">上面:</div>
                                 <div id="Up" class="downloadLinkButton">&nbsp;</div>
-                                <div data-lang-key="line_2_9">下面:</div>
+                                <div id="line_2_9" data-lang-key="line_2_9">下面:</div>
                                 <div id="Dn" class="downloadLinkButton">&nbsp;</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <!--- ============================================= -->
             <div class="card mt-4 bg-black text-white border-light">
                 <h2 class="card-header">3</h2>
                 <div class="card-body">
-                    <h5 class="card-title" data-lang-key="title_3">
-                        Roblox Studioで設定
-                    </h5>
-                    <div class="card-text" data-lang-key="line_3_1">
-                        Roblox
-                        Studioで、LightingのSkyに設定します。ファイル名の先頭とプロパティ名を合わせてください。
-                    </div>
+                    <h5 id="title_3" class="card-title" data-lang-key="title_3">Roblox Studioで設定</h5>
+                    <div class="card-text" id="line_3_1" data-lang-key="line_3_1">Roblox Studioで、LightingのSkyに設定します。ファイル名の記号とプロパティ名を合わせてください。</div>
                 </div>
             </div>
-
             <!--- ============================================= -->
             <footer>
                 <hr />
                 <div class="text-white">
-                    <small
-                        >Original code by
-                        <a
-                            href="https://github.com/jaxry"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >Lucas Crane</a
-                        >, Original design by
-                        <a
-                            href="http://motherfuckingwebsite.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >mf</a
-                        ></small
-                    >
+                    <small>Original code by <a href="https://github.com/jaxry" target="_blank" rel="noopener noreferrer">Lucas Crane</a>, Original design by <a href="http://motherfuckingwebsite.com/" target="_blank" rel="noopener noreferrer">mf</a></small>
                     <br />
-                    <small
-                        >Modified and improved by
-                        <a
-                            href="https://twitter.com/snj_esk"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >Shinji esk.</a
-                        ></small
-                    >
+                    <small>Modified and improved by <a href="https://twitter.com/snj_esk" target="_blank" rel="noopener noreferrer">Shinji esk.</a></small>
                 </div>
             </footer>
         </div>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"
-        ></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script src="js/lang.js"></script>
         <script>
+            const languages = {
+                en: {
+                    header_title: "Panorama to Roblox Skybox",
+                    hero_title: "Panorama to Roblox Skybox",
+                    hero_subtitle: "Convert 360° panorama images to Roblox's 6-face skybox images",
+                    title_1: "Upload Panorama Image",
+                    line_1_1: "Panorama image with an aspect ratio of 1:2 equirectangular projection",
+                    line_1_2: "Supported image formats are PNG, JPEG, WebP. EXR and HDR are not supported. To convert:",
+                    line_1_3: "For panorama images, visit:",
+                    line_1_4: "Select File",
+                    line_1_5: "Drag and drop here",
+                    line_1_6: "File Name:",
+                    line_1_7: "Width x Height:",
+                    title_2: "Download",
+                    line_2_1: "Click the links on the right to download each file",
+                    line_2_2: "Generating...",
+                    line_2_4: "Right:",
+                    line_2_5: "Left:",
+                    line_2_6: "Front:",
+                    line_2_7: "Back:",
+                    line_2_8: "Top:",
+                    line_2_9: "Bottom:",
+                    line_2_10: "Prefix + Filename",
+                    line_2_11: "Filename + Prefix",
+                    title_3: "Set in Roblox Studio",
+                    line_3_1: "Set it in Roblox Studio under Lighting's Sky. Match the prefix or suffix of the file name with the property name.",
+                },
+                jp: {
+                    header_title: "パノラマ to Robloxスカイボックス",
+                    hero_title: "パノラマ to Robloxスカイボックス",
+                    hero_subtitle: "360°パノラマ画像をRobroxの6面スカイボックス画像に変換します",
+                    title_1: "パノラマ画像をアップロード",
+                    line_1_1: "縦横比が1:2の等角円筒図法のパノマラ画像",
+                    line_1_2: "画像フォーマットはPNG、JPEG、WebPに対応。EXR、HDRには非対応です。変換するには：",
+                    line_1_3: "パノラマ画像の入手は：",
+                    line_1_4: "ファイルを選択",
+                    line_1_5: "ここにドラッグアンドドロップ",
+                    line_1_6: "ファイル名:",
+                    line_1_7: "横 x 縦:",
+                    title_2: "ダウンロード",
+                    line_2_1: "右のリンクをクリックして、各ファイルをダウンロードしてください",
+                    line_2_2: "生成中...",
+                    line_2_4: "右面:",
+                    line_2_5: "左面:",
+                    line_2_6: "前面:",
+                    line_2_7: "後面:",
+                    line_2_8: "上面:",
+                    line_2_9: "下面:",
+                    line_2_10: "記号＋ファイル名",
+                    line_2_11: "ファイル名＋記号",
+                    title_3: "Roblox Studioで設定",
+                    line_3_1: "Roblox Studioで、LightingのSkyに設定します。ファイル名の記号とプロパティ名を合わせてください。",
+                },
+            };
+
+            function changeLanguage(lang) {
+                localStorage.setItem('preferredLanguage', lang);
+                const elements = document.querySelectorAll('[data-lang-key]');
+                elements.forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    element.textContent = languages[lang][key];
+                });
+            }
+
+            function loadPreferredLanguage() {
+                const preferredLanguage = localStorage.getItem('preferredLanguage');
+                if (preferredLanguage) {
+                    changeLanguage(preferredLanguage);
+                } else {
+                    changeLanguage('jp'); // デフォルト言語
+                }
+            }
+
+            function saveRadioSelection() {
+                const selectedOption = document.querySelector('input[name="options"]:checked').value;
+                localStorage.setItem('selectedRadioOption', selectedOption);
+            }
+
+            function loadRadioSelection() {
+                const selectedOption = localStorage.getItem('selectedRadioOption');
+                if (selectedOption) {
+                    document.getElementById(selectedOption === 'prefix' ? 'option1' : 'option2').checked = true;
+                }
+            }
+
+            function updateFileNamesAndSave() {
+                updateFileNames();
+                saveRadioSelection();
+            }
+
+            function initializePage() {
+                loadPreferredLanguage();
+                loadRadioSelection();
+                document.body.style.opacity = '1';
+            }
+
             // Dropzone class configuration
             Dropzone.options.imageInput = {
                 url: "/upload", // Replace with your upload URL
@@ -268,8 +292,23 @@
                 acceptedFiles: "image/*",
             };
         </script>
-        <script type="module"  src="./src/utilities/dragDrop.js"></script>
+        <script type="module" src="./src/utilities/dragDrop.js"></script>
         <script type="module" src="./src/imageProcessing/loadImage.js"></script>
+        <script type="module">
+            import CubeFace from './src/cubeMapProcessing/CubeFace.js';
+            
+            const cubeFaces = [
+                new CubeFace('Rt'),
+                new CubeFace('Lf'),
+                new CubeFace('Ft'),
+                new CubeFace('Bk'),
+                new CubeFace('Up'),
+                new CubeFace('Dn')
+            ];
+    
+            window.updateFileNames = () => {
+                cubeFaces.forEach(face => face.updateFileNames());
+            };
+        </script>
     </body>
 </html>
-

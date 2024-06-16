@@ -23,6 +23,8 @@ let lang = {
         line_2_7: "後面",
         line_2_8: "上面",
         line_2_9: "下面",
+        line_2_10: "記号＋ファイル名",
+        line_2_11: "ファイル名＋記号",
         title_3: "Roblox Studioで設定",
         line_3_1:
             "Roblox StudioでLightingのSkyに設定します。ファイル名の先頭と、Skyのプロパティ名を合わせてください",
@@ -55,6 +57,8 @@ let lang = {
         line_2_7: "Back",
         line_2_8: "Up",
         line_2_9: "Down",
+        line_2_10: "Prefix + File name",
+        line_2_11: "File name + Suffix",
         title_3: "Setting in Roblox Studio",
         line_3_1:
             "Configure the Sky in Roblox Studio's Lighting to match the beginning of the file name with the Sky property name.",
