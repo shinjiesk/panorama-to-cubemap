@@ -28,7 +28,9 @@ class CubeFace {
     }
 
     generateFileName() {
-        const prefixOrSuffix = document.querySelector('input[name="options"]:checked').value;
+        const prefixOrSuffix = document.querySelector(
+            'input[name="options"]:checked'
+        ).value;
         const baseFileName = fileInfo.getFileName();
         let fileName;
         if (prefixOrSuffix === "prefix") {
@@ -42,7 +44,9 @@ class CubeFace {
 
     updateDownloadLinks() {
         const faces = dom.faces.querySelectorAll("a");
-        const prefixOrSuffix = document.querySelector('input[name="options"]:checked').value;
+        const prefixOrSuffix = document.querySelector(
+            'input[name="options"]:checked'
+        ).value;
         faces.forEach((face) => {
             const link = document.createElement("a");
             link.href = face.href;
@@ -70,16 +74,14 @@ class CubeFace {
 
     updateFileNames() {
         const faces = dom.faces.querySelectorAll("a");
-        faces.forEach(face => {
+        faces.forEach((face) => {
             face.download = this.generateFileName();
         });
         this.updateDownloadLinks();
     }
 }
 
-
 export default CubeFace;
-
 
 // import { dom } from "../dom/dom.js";
 // import fileInfo from "../utilities/fileInfo.js";
@@ -163,7 +165,6 @@ export default CubeFace;
 // }
 // export default CubeFace;
 
-
 // // import { dom } from "../dom/dom.js";
 // // import fileInfo from "../utilities/fileInfo.js";
 
@@ -214,10 +215,6 @@ export default CubeFace;
 // //             return `${baseFileName}_${this.faceName}.png`;
 // //         }
 // //     }
-
-
-
-
 
 // //     // ダウンロードファイル名を更新する関数
 // //     updateDownloadLinks() {
