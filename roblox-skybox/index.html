@@ -43,9 +43,21 @@
             gtag("js", new Date());
             gtag("config", "G-JLYTQ9JEPH");
 
+        </script>
+        <!-- /Google tag (gtag.js) --->
+
+        <script>
             function setInitialLanguage() {
                 const preferredLanguage = localStorage.getItem('preferredLanguage');
-                if (preferredLanguage) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const langParam = urlParams.get('lang');
+                if (langParam) {
+                    document.documentElement.lang = langParam;
+                    localStorage.setItem('preferredLanguage', langParam);
+                    // URLからlangパラメータを削除
+                    const newUrl = window.location.origin + window.location.pathname;
+                    window.history.replaceState({}, document.title, newUrl);
+                } else if (preferredLanguage) {
                     document.documentElement.lang = preferredLanguage;
                 } else {
                     document.documentElement.lang = 'jp'; // デフォルトの言語
@@ -53,7 +65,9 @@
             }
             setInitialLanguage();
         </script>
-        <!-- /Google tag (gtag.js) --->
+        
+        
+        
     </head>
     <body class="bg-black" onload="initializePage()">
         <div class="container px-3 mx-auto">
